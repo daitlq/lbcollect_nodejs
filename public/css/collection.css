@@ -1,0 +1,90 @@
+.thumbnails > li {
+    margin-right: 25px;
+	margin-top: 20px;
+}
+
+.thumbnails .span3{
+	width: 270px;
+}
+
+.thumbnail {
+	overflow:hidden;
+	text-align: center;
+}
+
+.thumbnail:hover {
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.thumbnail .title {
+    background: url("images/blockRepeat.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #CCCCCC;
+	line-height: 44px;
+    margin: -4px -4px 4px;
+	font-size: 16px;
+	color: darkred;
+	font-weight: bold;
+}
+
+.thumbnail img {
+	border: 0 none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.thumbnail .short-desc {
+	text-align: left;
+}
+
+.thumbnail .btn:hover {
+	color: #fff;
+	background:url(images/tabrepeat.png) repeat-x #d33800;
+}
+
+.book-item .title {
+    border-bottom: 1px dashed #0099FF;
+    color: darkred;
+    padding: 5px;
+	font-size: 18px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.book-item .title .btn-control {
+    float: right;
+	color: red;
+	margin-left: 10px;
+}
+
+.book-item .title a>[class*="icon-"]:hover {
+	color: #0099FF;
+	text-decoration:none;
+}
+
+.book-item .header {
+    margin: 10px 0;
+	clear: both;
+    height: auto;
+    margin: 10px 10px;
+}
+
+.book-item .header .cover {
+    float: left;
+    width: 280px;
+}
+
+.book-item .header .bookinfo {
+	margin-left: 20px;
+    float: left;
+    width: auto;
+}
+
+.book-item  .desc {
+	clear: both;
+	position:relative;
+    margin: 10px 0px;
+    padding: 10px 10px;
+}

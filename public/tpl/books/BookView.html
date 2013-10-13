@@ -1,0 +1,57 @@
+<div id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home"></i>
+			<a href="#">Home</a>
+
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			Collection
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			<a href="#books">Books</a>
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li><%= title %></li>
+	</ul><!--.breadcrumb-->
+</div>
+
+<div id="page-content" class="clearfix">
+	<div id="book" class="book-item" style="margin-bottom:0;">
+		<div class="title">
+			<%= title %>
+			<a href="" title="Delete this book"><i class="btn-control icon-trash"></i></a>
+			<a href="#books/edit/<%= id %>" title="Edit this book"><i class="btn-control icon-edit"></i></a>
+		</div>
+		<div class="header">
+			<div class="cover">
+				<a href="" title="">
+					<img src="css/images/no_image.jpg" alt=""/>
+				</a>
+			</div>
+			<div class="bookinfo">
+				<p>
+					<div id="author">Author: <%= author %></div>
+					<div id="publisher">Publisher: <%= publisher %></div>
+					<div id="author">Language: <%= language %></div>
+					<div id="publication_year">Publication Year: <%= publication_year %></div>
+					<div id="tag">Tag: </div>
+				</p>
+			</div>
+		</div>
+		<div class="desc">
+			<h4>Book Description</h4>
+			<p>
+				<%= description %> <br/>
+			</p>
+		</div>
+	</div>
+</div><!--/#page-book-->

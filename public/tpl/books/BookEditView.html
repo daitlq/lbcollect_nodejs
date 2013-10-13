@@ -1,0 +1,113 @@
+<div id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home"></i>
+			<a href="#">Home</a>
+
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			Collection
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			<a href="#books">Books</a>
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			<i class="control icon-edit"></i>
+			<%= title %>
+		</li>
+	</ul><!--.breadcrumb-->
+</div><!--.breadcrumbs-->
+
+<div class="row status-bar">
+    <div class="span12">
+        <div class="alert alert-success" style="display: none">
+            <b>Success!</b> Wine saved successfully
+        </div>
+    </div>
+</div>
+
+<div id="page-content" class="clearfix">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span4">
+				<div class="control-group">
+					<label for="title" class="control-label">Title:</label>
+					<div class="controls">
+						<input id="title" name="title" type="text" value="<%= title %>"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label for="tag" class="control-label">Tag:</label>
+					<div class="controls">
+						<select multiple="true" id="tag" name="tag" data-placeholder="">
+						</select>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label for="language" class="control-label">Language:</label>
+					<div class="controls">
+						<input id="language" name="language" type="text" value="<%= language %>"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+			</div>
+			<div class="span4">
+				<div class="control-group">
+					<label for="author" class="control-label">Author:</label>
+					<div class="controls">
+						<input id="author" name="author" type="text" value="<%= author %>"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label for="publisher" class="control-label">Publisher:</label>
+					<div class="controls">
+						<input id="publisher" name="publisher" type="text" value="<%= publisher %>"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label for="publication_year" class="control-label">Publication Year:</label>
+					<div class="controls">
+						<input id="publication_year" name="publication_year" type="text" value="<%= publication_year %>"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+			</div>
+			<div class="span4">
+				<div class="control-group">
+					<label for="image" class="control-label">Image Book:</label>
+					<div class="controls">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="control-group">
+				<label class="control-label" for="description">Description:</label>
+				<div class="controls">
+					<textarea class="ckeditor" id="description" name="description" rows="3"><%= description %></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<button id="btnSave">Save</button>
+			<button id="btnCancel">Cancel</button>
+		<div>
+	</div>
+</div><!--/#page-book-->
