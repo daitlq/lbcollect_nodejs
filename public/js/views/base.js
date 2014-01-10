@@ -42,7 +42,6 @@ window.BaseView = Backbone.View.extend({
 	
 	changeMenuItem: function(event) {
 		var menuItem = $(event.target).closest("li");
-		console.log(menuItem);
 		if ($(menuItem).find("ul").length > 0)
 			return;
 			

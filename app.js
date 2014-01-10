@@ -18,7 +18,9 @@ app.set('port', process.env.PORT || 8888);
 //app.set('view engine', 'jade');
 //app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(express.urlencoded());
+app.use(express.json());
+//app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
@@ -37,6 +39,7 @@ app.get('/api/books/:id', api_book.getById);
 app.post('/api/books', api_book.addBook);
 app.put('/api/books/:id', api_book.updateBook);
 app.delete('/api/books/:id', api_book.deleteBook);
+app.post('/api/books/upload', api_book.uploadImage);
 
 // tag
 api_tag = require('./api/tag');

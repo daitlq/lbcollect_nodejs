@@ -3,6 +3,7 @@ window.BookEditView = Backbone.View.extend({
 	events: {
 		"change"        	: "change",
         "click #btnSave"	: "save",
+		"submit #frmUpload"	: "upload",
 		"click #btnCancel"	: "cancelUpdate"
     },
 	
@@ -120,5 +121,16 @@ window.BookEditView = Backbone.View.extend({
 	
 	cancelUpdate: function() {
 		window.history.back();
+	},
+	
+	upload: function(event) {
+		event.preventDefault();
+		$("#frmUpload").ajaxSubmit({
+			url: '/api/books/upload', 
+			type: 'post',
+			success: function(data) {
+				console.log(data['files']);
+			}
+		});
 	}
 });

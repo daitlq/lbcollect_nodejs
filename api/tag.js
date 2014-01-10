@@ -24,6 +24,7 @@ var initSampleData = function() {
 }
 
 exports.getAll = function(request, response) {
+	//initSampleData();
 	Tag.find().exec(function(err, tags) {
 		if( !err ) {
 			response.send(tags);
