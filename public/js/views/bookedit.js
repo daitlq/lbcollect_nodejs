@@ -22,7 +22,10 @@ window.BookEditView = Backbone.View.extend({
 	render: function() {
 		var self = this;
 		$(this.el).html(this.template(this.model.toJSON()));
-		this.bookImages.findByBook(this.model.id);
+		
+		// load images of book
+		if (this.model.id != null)
+			this.bookImages.findByBook(this.model.id);
 		
 		// rich text editor
 		$('.ckeditor', this.el).ckeditor(function() {
