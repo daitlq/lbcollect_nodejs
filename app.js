@@ -26,6 +26,7 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'data')));
 
 // development only
 if ('development' == app.get('env')) {
@@ -50,6 +51,12 @@ api_booktag = require('./api/booktag');
 app.get('/api/booktags', api_booktag.getAll);
 app.post('/api/booktags', api_booktag.addBookTag);
 app.delete('/api/booktags/:id', api_booktag.deleteBookTag);
+
+// bookimage
+api_bookimage = require('./api/bok_image');
+app.get('/api/bookimages', api_bookimage.getAll);
+app.post('/api/bookimages', api_bookimage.addBookImage);
+app.delete('/api/bookimages/:id', api_bookimage.deleteBookImage);
 
 // create server
 http.createServer(app).listen(app.get('port'), function(){

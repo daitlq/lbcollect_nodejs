@@ -3,15 +3,17 @@ window.BookEditView = Backbone.View.extend({
 	events: {
 		"change"        	: "change",
         "click #btnSave"	: "save",
-		"submit #frmUpload"	: "upload",
+		"click #btnAddImage": "addImage",
 		"click #btnCancel"	: "cancelUpdate"
     },
 	
 	initialize: function() {
 		debug('Initializing Book Edit View');
 		this.bookTags = new BookTagCollection();
+		this.bookImages = new BookImageCollection();
 		if (this.model.id != null) {
 			this.bookTags.bind("reset", this.loadSelectedTags, this);
+			this.bookImages.bind("reset", this.loadBookImage, this);
 		}
 		this.bChangeTag = false;
 		this.bChangeDescription = false;
@@ -20,14 +22,75 @@ window.BookEditView = Backbone.View.extend({
 	render: function() {
 		var self = this;
 		$(this.el).html(this.template(this.model.toJSON()));
-		//rich text editor
+		this.bookImages.findByBook(this.model.id);
+		
+		// rich text editor
 		$('.ckeditor', this.el).ckeditor(function() {
 			this.on('change', function(e) { self.bChangeDescription = true; });
 		});
 		
+		// Load book's tag.
 		this.loadAllTags();
 		return this;
     },
+	
+	loadBookImage: function() {
+		var self = this;
+		
+		// show panel book
+		$("#panel-image", this.el).removeClass('hide');
+		
+		if (this.bookImages.models.length == 0)
+			$("#book-album", this.el).addClass('hide');
+		else {
+			$("#book-album", this.el).removeClass('hide');
+		
+			// load book's image
+			$("#list-book-image", this.el).html('');
+			_.each(this.bookImages.models, function(bookimage) {
+				$("#list-book-image", self.el).append('<li><img src="./collection/books/' + bookimage.attributes.image + '" alt="' + bookimage.attributes.image+ '"></li>');
+			}, this);
+			
+			$('.jcarousel', this.el).jcarousel({
+					wrap: 'circular'
+				});
+				
+			$('.jcarousel-pagination', this.el)
+				.on('jcarouselpagination:active', 'a', function() {
+					$(this).addClass('active');
+				})
+				.on('jcarouselpagination:inactive', 'a', function() {
+					$(this).removeClass('active');
+				})
+				.on('click', function(e) {
+					e.preventDefault();
+				})
+				.jcarouselPagination({
+					perPage: 1,
+					item: function(page) {
+					return '<a href="#' + page + '">' + page + '</a>';
+					}
+				});
+				
+			if (this.bookImages.models.length > 4) {
+				$(".jcarousel-control-prev", this.el).removeClass('hide');
+				$(".jcarousel-control-next", this.el).removeClass('hide');
+				
+				$('.jcarousel-control-prev', this.el)
+					.jcarouselControl({
+					target: '-=1'
+				});
+
+				$('.jcarousel-control-next', this.el)
+					.jcarouselControl({
+					target: '+=1'
+				});
+			} else {
+				$(".jcarousel-control-prev", this.el).addClass('hide');
+				$(".jcarousel-control-next", this.el).addClass('hide');
+			}
+		}
+	},
 	
 	loadAllTags: function() {
 		var self = this;
@@ -50,6 +113,7 @@ window.BookEditView = Backbone.View.extend({
 		_.each(this.bookTags.models, function(bookTag) {
 			arrTagSelected.push(bookTag.attributes.tag_id._id);
 		});
+		// Update book's tag on multichoice control.
 		$("#tag", this.el).val(arrTagSelected).trigger("chosen:updated");
 	},
 	
@@ -123,14 +187,51 @@ window.BookEditView = Backbone.View.extend({
 		window.history.back();
 	},
 	
-	upload: function(event) {
-		event.preventDefault();
-		$("#frmUpload").ajaxSubmit({
-			url: '/api/books/upload', 
-			type: 'post',
-			success: function(data) {
-				console.log(data['files']);
+	addImage: function(event) {
+		// Upload modal
+		this.initUploadModal();
+		$("#dlg-list-book-image", self.el).html('');
+		_.each(this.bookImages.models, function(bookimage) {
+			$("#dlg-list-book-image", self.el).append('<div class="span3 thumbnail"><img src="./collection/books/'+ bookimage.attributes.image + '" alt="' + bookimage.attributes.image + '"></div>');
+		}, this);
+		$("#dlg-upload-form").dialog("open");
+	},
+	
+	initUploadModal: function() {
+		var self = this;
+		var options = {
+			buttons: {}
+		};
+		$("#dlg-upload-form", this.el).dialog({
+			autoOpen: false,
+			height: 450,
+			width: 650,
+			modal: true,
+			buttons: {
+				Upload: function() {
+					$("#frmUpload").ajaxSubmit({
+						url: '/api/books/upload', 
+						type: 'post',
+						success: function(data) {
+							// successful upload book's image to server
+							$("#dlg-list-book-image", this.el).append('<div class="span3 thumbnail"><img src="./collection/books/'+ data.files.upload.name + '" alt="' + data.files.upload.name + '"></div>');
+														
+							// add book's image to database
+							var bookImage = new BookImage();
+							bookImage.set({book_id: self.model.attributes._id, image: data.files.upload.name});
+							bookImage.save(null, {
+								success: function() {
+									self.bookImages.findByBook(self.model.attributes._id);
+								}
+							});
+						}
+					});
+				},
+				Cancel: function() {
+					$(this).dialog("close");
+					$(this).dialog("destroy");
+				}
 			}
 		});
-	}
+	},
 });

@@ -143,7 +143,7 @@ exports.uploadImage = function(request, response) {
 	// parse a file upload
 	var form = new formidable.IncomingForm();
 	form.keepExtensions = true;
-	form.uploadDir ='./upload/';
+	form.uploadDir ='./data/collection/books';
 	form
 		.on('error', function(err) {
 			throw err;

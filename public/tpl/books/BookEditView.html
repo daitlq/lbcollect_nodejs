@@ -30,36 +30,35 @@
 <div class="row status-bar">
     <div class="span12">
         <div class="alert alert-success" style="display: none">
-            <b>Success!</b> Wine saved successfully
+            <b>Success!</b> Book saved successfully
         </div>
     </div>
 </div>
 
 <div id="page-content" class="clearfix">
 	<div class="container-fluid">
+		<div id="panel-image" class="row-fluid image-wrapper hide">
+			<div id="book-album" class="jcarousel-wrapper">
+				<div class="jcarousel">
+					<ul id="list-book-image"></ul>
+				</div>
+				
+				<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+				<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+				<p class="jcarousel-pagination"></p>
+			</div>
+			<div class="control-group">
+				<button id="btnAddImage">Add image</button>
+			</div>
+		</div>
+		
 		<div class="row-fluid">
 			<div class="span4">
 				<div class="control-group">
 					<label for="title" class="control-label">Title:</label>
 					<div class="controls">
 						<input id="title" name="title" type="text" value="<%= title %>"/>
-						<span class="help-inline"></span>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label for="tag" class="control-label">Tag:</label>
-					<div class="controls">
-						<select multiple="true" id="tag" name="tag" data-placeholder="">
-						</select>
-						<span class="help-inline"></span>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label for="language" class="control-label">Language:</label>
-					<div class="controls">
-						<input id="language" name="language" type="text" value="<%= language %>"/>
 						<span class="help-inline"></span>
 					</div>
 				</div>
@@ -72,7 +71,8 @@
 						<span class="help-inline"></span>
 					</div>
 				</div>
-				
+			</div>
+			<div class="span4">
 				<div class="control-group">
 					<label for="publisher" class="control-label">Publisher:</label>
 					<div class="controls">
@@ -80,27 +80,35 @@
 						<span class="help-inline"></span>
 					</div>
 				</div>
-				
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
 				<div class="control-group">
-					<label for="publication_year" class="control-label">Publication Year:</label>
+					<label for="tag" class="control-label">Tag:</label>
 					<div class="controls">
-						<input id="publication_year" name="publication_year" type="text" value="<%= publication_year %>"/>
+						<select multiple="true" id="tag" name="tag" data-placeholder="">
+						</select>
 						<span class="help-inline"></span>
 					</div>
 				</div>
 			</div>
 			<div class="span4">
 				<div class="control-group">
-					<label for="image" class="control-label">Image Book:</label>
+					<label for="language" class="control-label">Language:</label>
 					<div class="controls">
+						<input id="language" name="language" type="text" value="<%= language %>"/>
+						<span class="help-inline"></span>
 					</div>
 				</div>
-				
+			</div>
+			<div class="span4">			
 				<div class="control-group">
-					<form id="frmUpload" action="/api/books/upload" enctype="multipart/form-data" method="post">
-						<input type="file" id="file" name="upload" multiple="multiple"><br>
-						<input id="btnUpload" type="submit" value="Upload">
-					</form>
+					<label for="publication_year" class="control-label">Publication Year:</label>
+					<div class="controls">
+						<input id="publication_year" name="publication_year" type="text" value="<%= publication_year %>"/>
+						<span class="help-inline"></span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -116,5 +124,20 @@
 			<button id="btnSave">Save</button>
 			<button id="btnCancel">Cancel</button>
 		<div>
+		<!-- Dialog form to upload boook's image.-->
+		<div id="dlg-upload-form" class="hide" title="Add image">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<form id="frmUpload" action="" enctype="multipart/form-data" method="">
+						<input type="file" id="file" name="upload" multiple="multiple"><br>
+					</form>
+				</div>
+				<div class="row-fluid">
+					<div id="dlg-list-book-image" class="book-image-thumbnails">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/#dialog-form-->
 	</div>
 </div><!--/#page-book-->
