@@ -1,0 +1,18 @@
+img.button-rotate-360 { /* 1st set of icons. Rotate them 360deg onmouseover and out */
+	width: 50px;
+	height: 50px;
+	-moz-transition: all 0.8s ease-in-out;
+	-webkit-transition: all 0.8s ease-in-out;
+	-o-transition: all 0.8s ease-in-out;
+	-ms-transition: all 0.8s ease-in-out;
+	transition: all 0.8s ease-in-out;
+}
+
+img.button-rotate-360:hover {
+	cursor: pointer;
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
