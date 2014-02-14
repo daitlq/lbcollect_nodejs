@@ -41,12 +41,23 @@ window.BookListItemView = Backbone.View.extend({
 	initialize: function() {
 		this.model.bind("change", this.render, this);
 		this.model.bind("destroy", this.close, this);
+		
+		this.bookImages = new BookImageCollection();
+		this.bookImages.bind("reset", this.loadRandomThumbBookImage, this);
 	},
 
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
-		//$(".toolTipgroup a", this.el).tooltip();
-		return this;
-	}
+		
+		this.bookImages.findByBook(this.model.attributes._id);
 
+		return this;
+	},
+	
+	loadRandomThumbBookImage: function() {
+		if (this.bookImages.models.length > 0) {
+			var index = Math.floor(Math.random() * this.bookImages.models.length);
+			$("img", this.el).attr("src", './collection/books/' + this.bookImages.models[index].attributes.image);
+		}
+	}
 });

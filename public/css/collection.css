@@ -27,6 +27,10 @@
 	color: darkred;
 	font-weight: bold;
 }
+.thumbnail a {
+	outline: none;
+    text-decoration: none;
+}
 
 .thumbnail img {
 	border: 0 none;
@@ -49,7 +53,7 @@
     color: darkred;
     padding: 5px;
 	font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     text-transform: uppercase;
 }
 
@@ -73,7 +77,6 @@
 
 .book-item .header .cover {
     float: left;
-    width: 620px;
 }
 
 .book-item .header .bookinfo {
@@ -108,7 +111,6 @@
 }
 
 /** Carousel **/
-
 .jcarousel {
     position: relative;
     overflow: hidden;
@@ -224,7 +226,7 @@
 
 /** Stage container **/
 .connected-carousels .stage {
-    width: 620px;
+    width: 420px;
     margin: 20px auto;
     position: relative;
 }
@@ -270,10 +272,20 @@
     float: left;
 }
 
-/** Stage carousel specific styles **/
+.carousel .main-image img {
+	display: block;
+    max-width: 400px;
+    height: auto !important;
+}
 
+.carousel .thumb-images img {
+	display: block;
+    max-width: 50px;
+    height: auto !important;
+}
+/** Stage carousel specific styles **/
 .connected-carousels .carousel-stage {
-    height: 400px;
+    height: 300px;
     border: 10px solid #fff;
     -webkit-border-radius: 5px;
        -moz-border-radius: 5px;
@@ -286,7 +298,7 @@
 /** Navigation carousel specific styles **/
 
 .connected-carousels .carousel-navigation {
-    height: 60px;
+    height: 50px;
     width: 240px;
     background: #fff;
     border: 10px solid #fff;
@@ -318,8 +330,8 @@
     display: block;
     position: absolute;
     top: 0;
-    width: 305px;
-    height: 410px;
+    width: 210px;
+    height: 300px;
     color: #fff;
 }
 

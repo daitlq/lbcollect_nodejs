@@ -7,13 +7,16 @@ window.BookView = Backbone.View.extend({
 	initialize: function() {
 		debug('Initializing Book Details View');
 		this.bookTags = new BookTagCollection();
+		this.bookImages = new BookImageCollection();
 		this.bookTags.bind("reset", this.updateBookTag, this);
+		this.bookImages.bind("reset", this.loadBookImage, this);
 	},
 
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
 		this.bookTags.findByBook(this.model.id);
-		this.loadImage();
+		this.bookImages.findByBook(this.model.id);
+		//this.loadBookImage();
 		return this;
     },
 	
@@ -39,8 +42,20 @@ window.BookView = Backbone.View.extend({
         return carouselStage.jcarousel('items').eq(itemNavigation.index());
     },
 	
-	loadImage: function() {
+	loadBookImage: function() {
 		var self = this;
+		
+		// Load images to view.
+		$(".main-image", this.el).html('');
+		_.each(this.bookImages.models, function(bookimage) {
+			$(".main-image", self.el).append('<li><img src="./collection/books/' + bookimage.attributes.image + '" alt="' + bookimage.attributes.image+ '"></li>');
+		}, this);
+			
+		$(".thumb-images", this.el).html('');
+		_.each(this.bookImages.models, function(bookimage) {
+			$(".thumb-images", self.el).append('<li><img src="./collection/books/' + bookimage.attributes.image + '" alt="' + bookimage.attributes.image+ '"></li>');
+		}, this);
+		
 		// Setup the carousels. Adjust the options for both carousels here.
         var carouselStage      = $('.carousel-stage', this.el).jcarousel();
         var carouselNavigation = $('.carousel-navigation', this.el).jcarousel();
