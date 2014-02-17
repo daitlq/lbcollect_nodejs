@@ -3,6 +3,9 @@ window.Router = Backbone.Router.extend({
 	routes: {
 		"": "home",
 		"contact"	: "contact",
+		
+		"articles"	: "getListArticle",
+		
 		"books"		: "getListBook",
 		"books/add" : "addBook",
 		"books/:id"	: "getBook",
@@ -35,6 +38,17 @@ window.Router = Backbone.Router.extend({
 			this.contactView.render();
 		}
 		$("#main-content").html(this.contactView.el);
+	},
+	
+	getListArticle: function() {
+		var articleList = new ArticleCollection();
+		var self = this;
+		articleList.fetch({
+			success: function(articles) {
+				self.articleListView = new ArticleListView({collection: articles});
+				$("#main-content").html(self.articleListView.render().el);
+			}
+		});
 	},
 	
 	getListBook: function() {
@@ -76,6 +90,10 @@ var mapTemplates = {
 	"BaseView"			: "BaseView.html",
 	"HomeView"			: "HomeView.html",
 	"ContactView"		: "ContactView.html",
+	
+	"ArticleListView"		: "article/ArticleListView.html",
+	"ArticleListItemView"	: "article/ArticleListItemView.html",
+	
 	"BookListView"		: "books/BookListView.html",
 	"BookListItemView"	: "books/BookListItemView.html",
 	"BookView"			: "books/BookView.html",
@@ -83,7 +101,8 @@ var mapTemplates = {
 };
 
 utils.loadTemplate([
-						"BaseView", "HomeView", "ContactView", 
+						"BaseView", "HomeView", "ContactView",
+						"ArticleListView", "ArticleListItemView",
 						"BookListView", "BookListItemView", "BookView", "BookEditView"
 					],
 	function () {

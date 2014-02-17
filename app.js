@@ -33,6 +33,14 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 
+// Article
+api_article = require('./api/article');
+app.get('/api/articles', api_article.getAll);
+app.get('/api/articles/:id', api_article.getById);
+app.post('/api/articles', api_article.addArticle);
+app.put('/api/articles/:id', api_article.updateArticle);
+app.delete('/api/articles/:id', api_article.deleteArticle);
+
 // book
 api_book = require('./api/book');
 app.get('/api/books', api_book.getAll);
