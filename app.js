@@ -34,7 +34,11 @@ if ('development' == app.get('env')) {
 }
 
 // Article
-api_article = require('./api/article');
+api_artCategory = require('./api/article/category');
+app.get('/api/categories', api_artCategory.getAll);
+app.get('/api/categories/:id', api_artCategory.getById);
+
+api_article = require('./api/article/article');
 app.get('/api/articles', api_article.getAll);
 app.get('/api/articles/:id', api_article.getById);
 app.post('/api/articles', api_article.addArticle);

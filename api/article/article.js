@@ -1,3 +1,5 @@
+var categorySchema = require('./category.js');
+
 //Schemas
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema
@@ -6,12 +8,12 @@ var mongoose = require('mongoose')
 var ArticleSchema = new mongoose.Schema({
     title: String,
     author: String,
+	category: {type: Schema.ObjectId, ref: 'Category'},
 	time: String,
 	short_desc: String,
 	description: String
 });
-
-var Article = mongoose.model( 'Article', ArticleSchema );
+var Article = mongoose.model('Article', ArticleSchema);
 
 var initSampleData = function() {
 	var articles = [
@@ -44,7 +46,9 @@ exports.getAll = function(request, response) {
 }
 
 exports.getById = function(request, response) {
-    Article.findById(request.params.id, function(err, article){
+    Article.findById(request.params.id).populate({
+		path: 'category'
+	}).exec(function(err, article){
 		if (!err) {
 			response.send(article);
 		} else {
@@ -57,6 +61,7 @@ exports.addArticle = function(request, response) {
 	var article = new Article({
 		title: request.body.title,
 		author: request.body.author,
+		category: request.body.category,
 		time: request.body.time,
 		short_desc: request.body.short_desc,
 		description: request.body.description
@@ -74,6 +79,7 @@ exports.updateArticle = function(request, response) {
 	Article.findById(request.params.id, function(err, article) {
 		article.title = request.body.title;
 		article.author = request.body.author;
+		article.category = request.body.category,
 		article.time = request.body.time;
 		article.short_desc = request.body.short_desc;
 		article.description = request.body.description;

@@ -1,0 +1,51 @@
+<div id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home"></i>
+			<a href="#">Home</a>
+
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			Collection
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li>
+			<a href="#articles">Articles</a>
+			<span class="divider">
+				<i class="icon-angle-right"></i>
+			</span>
+		</li>
+		<li><%= title %></li>
+	</ul><!--.breadcrumb-->
+</div>
+
+<div id="page-content" class="clearfix">
+	<div id="article" class="article-item" style="margin-bottom:0;">
+		<div class="title">
+			<%= title %>
+			<a href="" title="Delete this article"><i class="btn-control icon-trash"></i></a>
+			<a href="#articles/edit/<%= id %>" title="Edit this article"><i class="btn-control icon-edit"></i></a>
+		</div>
+		<div class="header">
+			<div class="articleinfo">
+				<p>
+					<div id="author">Author: <%= author %></div>
+					<div id="category">Category: <%= category.name %></div>
+					<div id="time">Time: <%= time %></div>
+					<div id="short_desc">Short desc: <%= short_desc %></div>
+				</p>
+			</div>
+		</div>
+		<div class="desc">
+			<h4>article Description</h4>
+			<p>
+				<%= description %> <br/>
+			</p>
+		</div>
+	</div>
+</div><!--/#page-article-->

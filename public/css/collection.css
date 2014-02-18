@@ -48,6 +48,7 @@
 	background:url(images/tabrepeat.png) repeat-x #d33800;
 }
 
+.article-item .title,
 .book-item .title {
     border-bottom: 1px dashed #0099FF;
     color: darkred;
@@ -57,12 +58,14 @@
     text-transform: uppercase;
 }
 
+.article-item .title .btn-control,
 .book-item .title .btn-control {
     float: right;
 	color: red;
 	margin-left: 10px;
 }
 
+.article-item .title a>[class*="icon-"]:hover,
 .book-item .title a>[class*="icon-"]:hover {
 	color: #0099FF;
 	text-decoration:none;
